@@ -1,1 +1,33 @@
+As part of a statewide approach to individual tree detection, a method was developed based on
+photogrammetrically derived normalized Digital Surface Models (nDSM) with a resolution of 1 meter.
+The aim was not to identify every single tree with maximum accuracy, but rather to generate a 
+statistically robust and spatially consistent estimation of tree distribution across the entire
+state of Baden-Württemberg. These data serve as the basis for deriving a stand density raster at
+a 10×10 meter resolution. The detected individual trees act as a proxy for local stand density
+rather than as an exact tree count.
 
+Tree detection is performed automatically using a local maxima filter (LMF), a common technique
+in remote sensing for canopy detection. The key aspect of this methodology is the definition of
+a dynamic search window size that varies depending on the height value of the nDSM pixels. Higher
+nDSM values indicate taller trees, which generally correspond to larger canopy diameters. Therefore,
+the size of the search window, within which local maxima are identified as potential tree tops,
+is variable. For very small trees (under 2 meters), a minimum window size of 3 meters is used to 
+avoid misinterpretation of ground noise or smaller vegetation structures. For tree heights around
+20 meters and above, the window size is capped at 5 meters to prevent over-segmentation of very 
+large crowns. Between these thresholds, the window size grows asymptotically with tree height, 
+establishing a realistic relationship between tree height and canopy diameter.
+
+This adaptive approach takes into account the natural variability of tree sizes in the field and
+enables robust detection of individual trees even in heterogeneous stands. At the same time, it
+avoids excessive computational effort that would result from using very large or very small fixed
+windows across a uniform raster. By averaging detected trees over a 10×10 meter raster, the effects 
+of potential over- or under-detection of individual trees are largely balanced out. The focus is not
+on the absolute number of correctly identified trees, but on the consistent mapping of spatial differences
+in tree density. Thus, the method aims to capture patterns and distributions rather than conducting a
+full individual tree inventory.
+
+Overall, this approach offers a scalable, comprehensive, and statistically reliable way to utilize 
+photogrammetric height information for forestry planning and analysis purposes. The generated tree density
+information can be used as input variables in volume estimation models or as predictors in spatial analyses.
+The methodological standardization and automation across the entire state also enable reproducible and 
+comparable data sets over different time periods and regions.
