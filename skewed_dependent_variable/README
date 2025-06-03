@@ -1,0 +1,34 @@
+In our analysis, we observed that the dependent variable Vol, representing wood volume, exhibits a right-skewed distribution.
+This means that while the majority of data points cluster around lower values, a small number of observations lie far out on 
+the right tail of the distribution — these are unusually high volume values that occur rarely in the forest, but are valid 
+and plausible.
+
+Skewed data, particularly when it's right-skewed, can introduce several problems in modeling. Most statistical and machine
+learning models assume some level of symmetry or normality in the response variable. Right-skewed data can disproportionately 
+influence estimates like the mean, distort residuals, and lead to biased model predictions. Especially when outliers are extreme, 
+the model might overfit or give undue weight to these rare cases, at the expense of overall accuracy and generalization.
+
+To address this issue, we explored several transformation techniques aimed at reducing skewness and improving distributional symmetry:
+
+    Log transformation: This commonly used approach for right-skewed data overcorrected in our case. The transformation made the distribution
+strongly left-skewed, and this led to worse results in terms of model fit and interpretability.
+
+    Box-Cox transformation: This method was also tested, but it had the undesirable effect of collapsing most data values to a single constant.
+As a result, it significantly distorted the variable's structure and failed to preserve meaningful variation.
+
+    Scaling (standardization): Simply centering the data and scaling it to unit variance did not address the skewness problem. While it
+normalized the scale, it did nothing to mitigate the influence of extreme outliers.
+
+    Square root transformation: This method turned out to be the most effective. It reduced the skewness to nearly zero (approx. -0.17),
+while preserving the general distribution and interpretability of the data. Importantly, it dampened the effect of outliers without excessively 
+compressing the rest of the values.
+
+To evaluate the impact of these transformations visually, we created histograms of the original, scaled, and square root-transformed data.
+Each was color-coded by relative distance from the median to emphasize distribution symmetry and outlier influence. Among the approaches tested,
+the square root transformation achieved the best balance between visual clarity, statistical normality, and practical modeling performance.
+
+In conclusion, while the original right-skewed distribution of Vol is understandable given the ecological nature of the data, it poses challenges
+for modeling. Through systematic testing, we found that a square root transformation offers a simple yet effective solution, improving both the
+statistical properties of the variable and its suitability for predictive modeling. For now, we recommend using sqrt(Vol) as the transformed 
+response variable. Predictor variables, in contrast, do not necessarily require transformation unless they too exhibit problematic skewness
+or extreme scale differences.
