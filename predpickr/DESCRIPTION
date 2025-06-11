@@ -1,0 +1,11 @@
+
+Package: predpickr
+Type: Package
+Title: Predictor Selection for Regression Models
+Version: 0.1.0
+Authors@R: person('Philipp', 'Eisnecker', email = 'eisnecker.p@gmail.com', role = c('aut', 'cre'))
+Description: Selection method for predictors in linear and nonparametric regression models.
+License: MIT
+Encoding: UTF-8
+LazyData: true
+
